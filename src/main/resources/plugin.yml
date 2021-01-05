@@ -1,0 +1,6 @@
+name: RealEstate
+version: @version@
+main: com.github.frcsty.realestate.RealEstatePlugin
+api-version: 1.13
+author: Frcsty
+depend: ["GriefPrevention", "Vault"]

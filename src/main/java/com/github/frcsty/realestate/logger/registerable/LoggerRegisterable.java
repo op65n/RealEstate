@@ -9,6 +9,7 @@ public final class LoggerRegisterable implements Registerable {
     @Override
     public void register(final RealEstatePlugin plugin) {
         Logger.setLogger(plugin.getLogger());
+        Logger.setPlugin(plugin);
     }
 
 }

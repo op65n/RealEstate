@@ -7,7 +7,6 @@ settings:
       - "&aFor Sale!"
       - "&f{seller}"
       - "&f{price}€"
-    material: DARK_OAK_SIGN
   claim:
     default-price: 5
 

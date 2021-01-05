@@ -11,7 +11,6 @@ import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -57,7 +56,6 @@ public final class RealEstateSignCreateListener implements Listener {
             actionHandler.execute(player, ReplaceUtils.replaceList(true,
                     configuration.getStringList("message.notClaimOwner")
             ));
-            // log creation
             return;
         }
 
@@ -75,19 +73,18 @@ public final class RealEstateSignCreateListener implements Listener {
                 configuration.getStringList("message.sellingClaim"),
                 "{price}", claimPrice
         ));
-        // log creation
     }
 
-    @SuppressWarnings("ConstantConditions")
+    //@SuppressWarnings("ConstantConditions")
     private void setSignProperties(final SignChangeEvent event, final double price, final Player seller) {
-        event.setCancelled(true);
-
+        /*
         if (configuration.get("settings.sign.material") != null) {
             Material material = Material.matchMaterial(configuration.getString("settings.sign.material"));
 
             if (material == null) material = Material.DARK_OAK_SIGN;
             event.getBlock().setType(material);
         }
+        */
 
         Sign block = (Sign) event.getBlock().getState();
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
@@ -104,9 +101,8 @@ public final class RealEstateSignCreateListener implements Listener {
             final PersistentDataContainer container = block.getPersistentDataContainer();
             container.set(PluginKey.getKey("RealEstate_PropertyOwner"), PersistentDataType.STRING, seller.getUniqueId().toString());
             container.set(PluginKey.getKey("RealEstate_PropertyPrice"), PersistentDataType.DOUBLE, price);
-            block.update(true);
 
-            block.getLocation().setDirection(seller.getLocation().getDirection().multiply(-1));
+            block.update(true);
         }, 2L);
     }
 

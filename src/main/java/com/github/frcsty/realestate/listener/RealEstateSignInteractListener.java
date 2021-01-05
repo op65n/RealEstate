@@ -4,6 +4,7 @@ import com.github.frcsty.frozenactions.util.ReplaceUtils;
 import com.github.frcsty.frozenactions.wrapper.ActionHandler;
 import com.github.frcsty.realestate.RealEstatePlugin;
 import com.github.frcsty.realestate.listener.event.RealEstateSignInteractEvent;
+import com.github.frcsty.realestate.logger.Logger;
 import com.github.frcsty.realestate.queue.MessageQueue;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
@@ -89,7 +90,11 @@ public final class RealEstateSignInteractListener implements Listener {
                 );
             }
 
-            event.getRealEstateSign().setType(Material.AIR);
+            event.getRealEstateSign().getBlock().setType(Material.AIR);
+            Logger.logTransaction(buyer.getUniqueId(), String.format(
+                    "User '%s' bought a claim from '%s' for '%s' on date '%s'",
+                    buyer.getUniqueId().toString(), seller.getUniqueId().toString(), claimPrice, System.currentTimeMillis()
+            ));
         }
     }
 

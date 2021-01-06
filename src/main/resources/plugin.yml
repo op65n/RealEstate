@@ -1,6 +1,7 @@
 name: RealEstate
 version: @version@
-main: com.github.frcsty.realestate.RealEstatePlugin
-api-version: 1.13
+main: RealEstatePlugin
+api-version: 1.16
 author: Frcsty
+website: "https://op65n.tech/"
 depend: ["GriefPrevention", "Vault"]

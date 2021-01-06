@@ -27,7 +27,7 @@ The plugin provides two basic events, to allow for further customization <br>
 Which is fired when a user creates a valid RealEstate sign <br>
 The event is caught by a listener, to allow for cancellation of the event in the future <br>
 <br>
-<br>
+
  - `RealEstateSignInteractEvent` <br>
 Which is fired when a user interacts with a valid ReadEstate sign <br>
 The event is caught by a listener, to allow for cancellation of the event in the future <br>

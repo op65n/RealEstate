@@ -23,12 +23,12 @@ This is a plugin built on PaperAPI, and is required to properly run this plugin.
 ## Events
 The plugin provides two basic events, to allow for further customization <br>
 
- * `RealEstateSignCreateEvent` <br>
+ - `RealEstateSignCreateEvent` <br>
 Which is fired when a user creates a valid RealEstate sign <br>
 The event is caught by a listener, to allow for cancellation of the event in the future <br>
 <br>
 <br>
- * `RealEstateSignInteractEvent` <br>
+ - `RealEstateSignInteractEvent` <br>
 Which is fired when a user interacts with a valid ReadEstate sign <br>
 The event is caught by a listener, to allow for cancellation of the event in the future <br>
 
@@ -42,3 +42,7 @@ The event is caught by a listener, to allow for cancellation of the event in the
 
 - The plugin provides a message queue, which ensures offline sellers are notified of sales,
 upon logging in to the server.
+
+> Action Support
+
+- The plugin supports all actions provided by the <a href="https://github.com/Frcsty/FrozenActions">FrozenActions</a> library.

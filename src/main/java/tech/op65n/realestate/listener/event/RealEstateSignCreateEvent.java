@@ -20,14 +20,29 @@ public final class RealEstateSignCreateEvent extends Event {
         this.lines = Arrays.asList(event.getLines());
     }
 
+    /**
+     * Returns the player which has created a RealEstate sign
+     *
+     * @return RealEstate sign creator
+     */
     public Player getPlayer() {
         return this.player;
     }
 
+    /**
+     * Returns the sign's contents
+     *
+     * @return Sign contents
+     */
     public List<String> getLines() {
         return this.lines;
     }
 
+    /**
+     * Returns the base event
+     *
+     * @return {@link SignChangeEvent}
+     */
     public SignChangeEvent getBaseEvent() {
         return this.event;
     }

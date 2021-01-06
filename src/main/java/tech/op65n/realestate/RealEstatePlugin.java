@@ -1,10 +1,10 @@
 package tech.op65n.realestate;
 
 import com.github.frcsty.frozenactions.wrapper.ActionHandler;
+import org.bukkit.plugin.java.JavaPlugin;
 import tech.op65n.realestate.listener.registerable.ListenerRegisterable;
 import tech.op65n.realestate.logger.registerable.LoggerRegisterable;
 import tech.op65n.realestate.queue.registerable.QueueRegisterable;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -35,6 +35,11 @@ public final class RealEstatePlugin extends JavaPlugin {
         registerables.forEach(it -> it.unregister(this));
     }
 
+    /**
+     * Retrieves our loaded {@link com.github.frcsty.frozenactions.wrapper.ActionHandler} instance
+     *
+     * @return loaded {@link ActionHandler}
+     */
     public ActionHandler getActionHandler() {
         return this.actionHandler;
     }

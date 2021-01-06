@@ -98,6 +98,13 @@ public final class RealEstateSignInteractListener implements Listener {
         }
     }
 
+    /**
+     * Checks if the buyer can afford to purchase a claim
+     *
+     * @param buyer Claim buyer
+     * @param price Claim price
+     * @return true/false if the buyer can afford to purchase the claim
+     */
     private boolean canAffordClaim(final Player buyer, final double price) {
         final double balance = economy.getBalance(buyer);
 

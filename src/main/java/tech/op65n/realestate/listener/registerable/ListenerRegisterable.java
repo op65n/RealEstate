@@ -15,6 +15,11 @@ import java.util.Arrays;
 
 public final class ListenerRegisterable implements Registerable {
 
+    /**
+     * Registers our listeners
+     *
+     * @param plugin Our plugin instance
+     */
     @Override
     public void register(final RealEstatePlugin plugin) {
         PluginKey.setPlugin(plugin);
@@ -30,6 +35,12 @@ public final class ListenerRegisterable implements Registerable {
         );
     }
 
+    /**
+     * Registers all given listeners
+     *
+     * @param plugin Our plugin instance
+     * @param listeners Our listeners to be registered
+     */
     private void registerListeners(final RealEstatePlugin plugin, final Listener... listeners) {
         Arrays.stream(listeners).forEach(it -> Bukkit.getPluginManager().registerEvents(it, plugin));
     }

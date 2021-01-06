@@ -36,6 +36,11 @@ public final class RealEstateSignCreateListener implements Listener {
         this.configuration = plugin.getConfig();
     }
 
+    /**
+     * Manages the event call
+     *
+     * @param event {@link RealEstateSignCreateEvent}
+     */
     @EventHandler
     @SuppressWarnings("UnstableApiUsage")
     public void onSignCreate(final RealEstateSignCreateEvent event) {
@@ -75,6 +80,13 @@ public final class RealEstateSignCreateListener implements Listener {
         ));
     }
 
+    /**
+     * Set's the sign's properties (contents)
+     *
+     * @param event Base event
+     * @param price Claim price
+     * @param seller Property seller
+     */
     //@SuppressWarnings("ConstantConditions")
     private void setSignProperties(final SignChangeEvent event, final double price, final Player seller) {
         /*
@@ -106,6 +118,11 @@ public final class RealEstateSignCreateListener implements Listener {
         }, 2L);
     }
 
+    /**
+     * Returns the default claim block price if not price is specified
+     *
+     * @return default price
+     */
     private double getDefaultPrice() {
         final ConfigurationSection claimSection = configuration.getConfigurationSection("settings.claim");
         if (claimSection == null) {

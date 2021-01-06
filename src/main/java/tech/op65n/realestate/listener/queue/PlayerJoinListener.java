@@ -16,6 +16,11 @@ public final class PlayerJoinListener implements Listener {
         this.actionHandler = plugin.getActionHandler();
     }
 
+    /**
+     * Handles and executes our {@link MessageQueue}
+     *
+     * @param event {@link PlayerJoinEvent}
+     */
     @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();

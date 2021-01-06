@@ -16,6 +16,12 @@ public final class MessageQueue {
 
     private static final Map<UUID, List<String>> MESSAGE_QUEUE = new HashMap<>();
 
+    /**
+     * Adds a message to the queue when a user sells a claim and they're offline
+     *
+     * @param receiver {@link UUID} of the message receiver (seller)
+     * @param message {@link List} of the message to be sent
+     */
     public static void addToQueue(final UUID receiver, final List<String> message) {
         final List<String> queueMessage = MESSAGE_QUEUE.getOrDefault(receiver, new ArrayList<>());
 
@@ -23,6 +29,12 @@ public final class MessageQueue {
         MESSAGE_QUEUE.put(receiver, queueMessage);
     }
 
+    /**
+     * Executes queued messages for a {@link Player}
+     *
+     * @param handler {@link ActionHandler} Loaded ActionHandler
+     * @param player {@link Player} message receiver (seller)
+     */
     public static void executeForReceiver(final ActionHandler handler, final Player player) {
         final UUID uuid = player.getUniqueId();
 
@@ -33,6 +45,11 @@ public final class MessageQueue {
         MESSAGE_QUEUE.remove(uuid);
     }
 
+    /**
+     * Loads queued messages from file into our {@link Map}
+     *
+     * @param plugin Our plugin instance
+     */
     public static void loadFromFile(final RealEstatePlugin plugin) {
         final File file = new File(plugin.getDataFolder(), "message-queue.yml");
         if (!file.exists()) return;
@@ -50,6 +67,12 @@ public final class MessageQueue {
         file.delete();
     }
 
+    /**
+     * Saves queued messages to a file
+     *
+     * @param plugin Our plugin instance
+     * @throws IOException if a new file could not be created
+     */
     public static void saveToFile(final RealEstatePlugin plugin) throws IOException {
         final File file = new File(plugin.getDataFolder(), "message-queue.yml");
         if (!file.exists())

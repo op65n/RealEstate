@@ -28,22 +28,42 @@ public final class RealEstateSignInteractEvent extends Event {
         this.container = sign.getPersistentDataContainer();
     }
 
+    /**
+     * Returns the property buyer
+     *
+     * @return Property buyer
+     */
     public Player getBuyer() {
         return this.player;
     }
 
+    /**
+     * Returns the property seller
+     *
+     * @return Property seller
+     */
     public OfflinePlayer getSeller() {
         final String sellerUUID = container.get(PluginKey.getKey("RealEstate_PropertyOwner"), PersistentDataType.STRING);
 
         return Bukkit.getOfflinePlayer(UUID.fromString(Objects.requireNonNull(sellerUUID)));
     }
 
+    /**
+     * Returns the price the property was sold to
+     *
+     * @return Property price
+     */
     public double getPropertyPrice() {
         final Double propertyPrice = container.get(PluginKey.getKey("RealEstate_PropertyPrice"), PersistentDataType.DOUBLE);
 
         return propertyPrice == null ? 0 : propertyPrice;
     }
 
+    /**
+     * Returns the sign used for the transaction
+     *
+     * @return RealEstate sign
+     */
     public Sign getRealEstateSign() {
         return this.sign;
     }

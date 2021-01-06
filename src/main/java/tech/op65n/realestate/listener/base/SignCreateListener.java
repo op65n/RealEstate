@@ -29,6 +29,12 @@ public final class SignCreateListener implements Listener {
         ));
     }
 
+    /**
+     * Checks if the involved sign is a Real Estate sign
+     *
+     * @param lines Sign contents
+     * @return status on whether a sign is a Real Estate sign or not
+     */
     private boolean isRealEstateSign(final String[] lines) {
         if (lines.length == 0) return false;
 

@@ -32,6 +32,12 @@ public final class SignInteractListener implements Listener {
         ));
     }
 
+    /**
+     * Checks if a clicked block is a Real Estate sign
+     *
+     * @param block Clicked block
+     * @return status on whether a block is a RealEstate sign
+     */
     private boolean isNotRealEstateSign(final Block block) {
         if (block == null) return true;
         if (!(block.getState() instanceof Sign)) return true;

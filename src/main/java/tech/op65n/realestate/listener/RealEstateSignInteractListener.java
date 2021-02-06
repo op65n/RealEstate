@@ -1,11 +1,7 @@
 package tech.op65n.realestate.listener;
 
-import com.github.frcsty.frozenactions.util.ReplaceUtils;
+import com.github.frcsty.frozenactions.util.Replace;
 import com.github.frcsty.frozenactions.wrapper.ActionHandler;
-import tech.op65n.realestate.RealEstatePlugin;
-import tech.op65n.realestate.listener.event.RealEstateSignInteractEvent;
-import tech.op65n.realestate.logger.Logger;
-import tech.op65n.realestate.queue.MessageQueue;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import net.milkbowl.vault.economy.Economy;
@@ -19,6 +15,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import tech.op65n.realestate.RealEstatePlugin;
+import tech.op65n.realestate.listener.event.RealEstateSignInteractEvent;
+import tech.op65n.realestate.logger.Logger;
+import tech.op65n.realestate.queue.MessageQueue;
 
 public final class RealEstateSignInteractListener implements Listener {
 
@@ -26,7 +26,7 @@ public final class RealEstateSignInteractListener implements Listener {
     private final GriefPrevention griefPrevention = GriefPrevention.instance;
     private final FileConfiguration configuration;
 
-    private Economy economy;
+    private final Economy economy;
 
     public RealEstateSignInteractListener(final RealEstatePlugin plugin) {
         this.actionHandler = plugin.getActionHandler();
@@ -49,7 +49,7 @@ public final class RealEstateSignInteractListener implements Listener {
         final OfflinePlayer seller = event.getSeller();
 
         if (buyer.getUniqueId().toString().equalsIgnoreCase(seller.getUniqueId().toString())) {
-            actionHandler.execute(buyer, ReplaceUtils.replaceList(true,
+            actionHandler.execute(buyer, Replace.replaceList(
                     configuration.getStringList("message.claimOwner")
             ));
             return;
@@ -57,7 +57,7 @@ public final class RealEstateSignInteractListener implements Listener {
 
         final double claimPrice = event.getPropertyPrice();
         if (!canAffordClaim(buyer, claimPrice)) {
-            actionHandler.execute(buyer, ReplaceUtils.replaceList(true,
+            actionHandler.execute(buyer, Replace.replaceList(
                     configuration.getStringList("message.missingPurchaseFunds")
             ));
             return;
@@ -70,20 +70,20 @@ public final class RealEstateSignInteractListener implements Listener {
             claim.ownerID = buyer.getUniqueId();
 
             economy.depositPlayer(seller, claimPrice);
-            actionHandler.execute(buyer, ReplaceUtils.replaceList(true,
+            actionHandler.execute(buyer, Replace.replaceList(
                     configuration.getStringList("message.purchasedClaim"),
                     "{price}", claimPrice,
                     "{seller}", seller.getName()
             ));
 
             if (seller.isOnline()) {
-                actionHandler.execute(seller.getPlayer(), ReplaceUtils.replaceList(true,
+                actionHandler.execute(seller.getPlayer(), Replace.replaceList(
                         configuration.getStringList("message.soldClaim"),
                         "{price}", claimPrice,
                         "{buyer}", buyer.getName()
                 ));
             } else {
-                MessageQueue.addToQueue(seller.getUniqueId(), ReplaceUtils.replaceList(true,
+                MessageQueue.addToQueue(seller.getUniqueId(), Replace.replaceList(
                         configuration.getStringList("message.soldClaim"),
                         "{price}", claimPrice,
                         "{buyer}", buyer.getName())

@@ -1,11 +1,7 @@
 package tech.op65n.realestate.listener;
 
-import com.github.frcsty.frozenactions.util.ReplaceUtils;
+import com.github.frcsty.frozenactions.util.Replace;
 import com.github.frcsty.frozenactions.wrapper.ActionHandler;
-import tech.op65n.realestate.RealEstatePlugin;
-import tech.op65n.realestate.listener.event.RealEstateSignCreateEvent;
-import tech.op65n.realestate.logger.Logger;
-import tech.op65n.realestate.namespace.PluginKey;
 import com.google.common.primitives.Doubles;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
@@ -20,6 +16,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import tech.op65n.realestate.RealEstatePlugin;
+import tech.op65n.realestate.listener.event.RealEstateSignCreateEvent;
+import tech.op65n.realestate.logger.Logger;
+import tech.op65n.realestate.namespace.PluginKey;
 
 import java.util.List;
 
@@ -51,14 +51,14 @@ public final class RealEstateSignCreateListener implements Listener {
 
         final Claim claim = griefPrevention.dataStore.getClaimAt(location, false, null);
         if (claim == null) {
-            actionHandler.execute(player, ReplaceUtils.replaceList(true,
+            actionHandler.execute(player, Replace.replaceList(
                     configuration.getStringList("message.notInAClaim")
             ));
             return;
         }
 
         if (!claim.ownerID.toString().equalsIgnoreCase(player.getUniqueId().toString())) {
-            actionHandler.execute(player, ReplaceUtils.replaceList(true,
+            actionHandler.execute(player, Replace.replaceList(
                     configuration.getStringList("message.notClaimOwner")
             ));
             return;
@@ -74,7 +74,7 @@ public final class RealEstateSignCreateListener implements Listener {
         }
 
         setSignProperties(baseEvent, claimPrice, player);
-        actionHandler.execute(player, ReplaceUtils.replaceList(true,
+        actionHandler.execute(player, Replace.replaceList(
                 configuration.getStringList("message.sellingClaim"),
                 "{price}", claimPrice
         ));
@@ -83,26 +83,16 @@ public final class RealEstateSignCreateListener implements Listener {
     /**
      * Set's the sign's properties (contents)
      *
-     * @param event Base event
-     * @param price Claim price
+     * @param event  Base event
+     * @param price  Claim price
      * @param seller Property seller
      */
-    //@SuppressWarnings("ConstantConditions")
     private void setSignProperties(final SignChangeEvent event, final double price, final Player seller) {
-        /*
-        if (configuration.get("settings.sign.material") != null) {
-            Material material = Material.matchMaterial(configuration.getString("settings.sign.material"));
-
-            if (material == null) material = Material.DARK_OAK_SIGN;
-            event.getBlock().setType(material);
-        }
-        */
-
         Sign block = (Sign) event.getBlock().getState();
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             int index = 0;
             for (final String line : configuration.getStringList("settings.sign.lines")) {
-                block.setLine(index, ReplaceUtils.replaceString(true,
+                block.setLine(index, Replace.replaceString(
                         line,
                         "{price}", price,
                         "{seller}", seller.getName()

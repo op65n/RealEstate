@@ -1,0 +1,7 @@
+name: RealEstate
+version: 1.0.0-Release
+main: RealEstatePlugin
+api-version: 1.16
+author: Frcsty
+website: "https://op65n.tech/"
+depend: ["GriefPrevention", "Vault"]

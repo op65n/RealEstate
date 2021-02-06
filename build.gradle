@@ -6,21 +6,21 @@ plugins {
 }
 
 group = "tech.op65n.realestate"
-version = "1.0.0-Alpha"
+version = "1.0.0-Release"
 
 repositories {
 	mavenCentral()
-	mavenLocal()
 	maven { url "https://repo.destroystokyo.com/repository/maven-public/" }
 	maven { url "https://repo.mattstudios.me/artifactory/public" }
+	maven { url "https://frosty.op65n.tech/maven/" }
 	maven { url "https://jitpack.io" }
 }
 
 dependencies {
 	implementation "me.mattstudios.utils:matt-framework:1.4"
 	implementation "me.mattstudios:mf-msg-bukkit:2.0.2"
-	
-	implementation "com.github.frcsty:FrozenActions:1.0.6"
+
+	implementation "com.github.frcsty.frozenactions:FrozenActionsJava:1.0.8"
 
 	compileOnly("com.github.MilkBowl:VaultAPI:1.7") { exclude group: "org.bukkit" }
 	compileOnly "com.github.TechFortress:GriefPrevention:16.17.0"

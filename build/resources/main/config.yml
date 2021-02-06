@@ -1,0 +1,27 @@
+settings:
+  sign:
+    short: "[RE]"
+    long: "[RealEstate]"
+    lines:
+      - "&#00b9f0[&#006dffRealEstate&#00b9f0]"
+      - "&aFor Sale!"
+      - "&f{seller}"
+      - "&f{price}€"
+  claim:
+    default-price: 5
+
+message:
+  claimOwner:
+    - "[ACTIONBARMESSAGE] &8[&#006dffRealEstate&8] &7You can not purchase your own claim."
+  missingPurchaseFunds:
+    - "[ACTIONBARMESSAGE] &8[&#006dffRealEstate&8] &7You can not afford to purchase this claim!"
+  purchasedClaim:
+    - "[MESSAGE] &8[&#006dffRealEstate&8] &7You have purchased a claim from &f{seller} &7for &f{price}€&7."
+  soldClaim:
+    - "[MESSAGE] &8[&#006dffRealEstate&8] &7You have sold a claim for &f{price}€ &7to &f{buyer}&7."
+  notInAClaim:
+    - "[ACTIONBARMESSAGE] &8[&#006dffRealEstate&8] &7You are not in a claim."
+  notClaimOwner:
+    - "[ACTIONBARMESSAGE] &8[&#006dffRealEstate&8] &7You can not sell this claim as you do not own it!"
+  sellingClaim:
+    - "[MESSAGE] &8[&#006dffRealEstate&8] &7You are now selling a claim for &f{price}€&7."

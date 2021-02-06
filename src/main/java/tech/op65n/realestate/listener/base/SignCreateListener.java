@@ -1,7 +1,5 @@
 package tech.op65n.realestate.listener.base;
 
-import tech.op65n.realestate.listener.event.RealEstateSignCreateEvent;
-import tech.op65n.realestate.logger.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -9,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.plugin.PluginManager;
+import tech.op65n.realestate.listener.event.RealEstateSignCreateEvent;
+import tech.op65n.realestate.logger.Logger;
 
 public final class SignCreateListener implements Listener {
 
@@ -22,7 +22,9 @@ public final class SignCreateListener implements Listener {
 
     @EventHandler
     public void onSignChange(final SignChangeEvent event) {
-        if (!isRealEstateSign(event.getLines())) return;
+        if (!isRealEstateSign(event.getLines())) {
+            return;
+        }
 
         pluginManager.callEvent(new RealEstateSignCreateEvent(
                 event
@@ -36,7 +38,9 @@ public final class SignCreateListener implements Listener {
      * @return status on whether a sign is a Real Estate sign or not
      */
     private boolean isRealEstateSign(final String[] lines) {
-        if (lines.length == 0) return false;
+        if (lines.length == 0) {
+            return false;
+        }
 
         final String line = lines[0];
         final ConfigurationSection signSection = configuration.getConfigurationSection("settings.sign");

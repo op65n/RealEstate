@@ -1,5 +1,6 @@
 package tech.op65n.realestate.listener;
 
+import com.github.frcsty.frozenactions.util.Color;
 import com.github.frcsty.frozenactions.util.Replace;
 import com.github.frcsty.frozenactions.wrapper.ActionHandler;
 import com.google.common.primitives.Doubles;
@@ -51,16 +52,16 @@ public final class RealEstateSignCreateListener implements Listener {
 
         final Claim claim = griefPrevention.dataStore.getClaimAt(location, false, null);
         if (claim == null) {
-            actionHandler.execute(player, Replace.replaceList(
+            actionHandler.execute(player, Color.translate(Replace.replaceList(
                     configuration.getStringList("message.notInAClaim")
-            ));
+            )));
             return;
         }
 
         if (!claim.ownerID.toString().equalsIgnoreCase(player.getUniqueId().toString())) {
-            actionHandler.execute(player, Replace.replaceList(
+            actionHandler.execute(player, Color.translate(Replace.replaceList(
                     configuration.getStringList("message.notClaimOwner")
-            ));
+            )));
             return;
         }
 
@@ -74,10 +75,10 @@ public final class RealEstateSignCreateListener implements Listener {
         }
 
         setSignProperties(baseEvent, claimPrice, player);
-        actionHandler.execute(player, Replace.replaceList(
+        actionHandler.execute(player, Color.translate(Replace.replaceList(
                 configuration.getStringList("message.sellingClaim"),
                 "{price}", claimPrice
-        ));
+        )));
     }
 
     /**
@@ -92,11 +93,11 @@ public final class RealEstateSignCreateListener implements Listener {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             int index = 0;
             for (final String line : configuration.getStringList("settings.sign.lines")) {
-                block.setLine(index, Replace.replaceString(
+                block.setLine(index, Color.translate(Replace.replaceString(
                         line,
                         "{price}", price,
                         "{seller}", seller.getName()
-                ));
+                )));
                 index++;
             }
 

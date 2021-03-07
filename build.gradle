@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "tech.op65n.realestate"
-version = "1.0.0-Release"
+version = "420.6.9-PrePotato"
 
 repositories {
 	mavenCentral()
@@ -30,6 +30,7 @@ dependencies {
 shadowJar {
 	minimize()
 	relocate "me.mattstudios.mf", "${project.group}.library.mf"
+	relocate "com.github.frcsty.frozenactions", "${project.group}.library.actions"
 
 	archiveFileName.set("RealEstate-${project.version}.jar")
 }

@@ -1,6 +1,6 @@
 name: RealEstate
-version: 1.0.0-Release
-main: RealEstatePlugin
+version: 420.6.9-PrePotato
+main: tech.op65n.realestate.RealEstatePlugin
 api-version: 1.16
 author: Frcsty
 website: "https://op65n.tech/"

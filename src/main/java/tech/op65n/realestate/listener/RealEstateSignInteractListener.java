@@ -1,5 +1,6 @@
 package tech.op65n.realestate.listener;
 
+import com.github.frcsty.frozenactions.util.Color;
 import com.github.frcsty.frozenactions.util.Replace;
 import com.github.frcsty.frozenactions.wrapper.ActionHandler;
 import me.ryanhamshire.GriefPrevention.Claim;
@@ -49,45 +50,50 @@ public final class RealEstateSignInteractListener implements Listener {
         final OfflinePlayer seller = event.getSeller();
 
         if (buyer.getUniqueId().toString().equalsIgnoreCase(seller.getUniqueId().toString())) {
-            actionHandler.execute(buyer, Replace.replaceList(
+            actionHandler.execute(buyer, Color.translate(Replace.replaceList(
                     configuration.getStringList("message.claimOwner")
-            ));
+            )));
             return;
         }
 
         final double claimPrice = event.getPropertyPrice();
         if (!canAffordClaim(buyer, claimPrice)) {
-            actionHandler.execute(buyer, Replace.replaceList(
+            actionHandler.execute(buyer, Color.translate(Replace.replaceList(
                     configuration.getStringList("message.missingPurchaseFunds")
-            ));
+            )));
             return;
         }
 
         final Claim claim = griefPrevention.dataStore.getClaimAt(sign.getLocation(), true, null);
+        if (claim == null) {
+            event.getRealEstateSign().getBlock().setType(Material.AIR);
+            return;
+        }
+
         final EconomyResponse economyResponse = economy.withdrawPlayer(buyer, claimPrice);
 
         if (economyResponse.transactionSuccess()) {
             claim.ownerID = buyer.getUniqueId();
 
             economy.depositPlayer(seller, claimPrice);
-            actionHandler.execute(buyer, Replace.replaceList(
+            actionHandler.execute(buyer, Color.translate(Replace.replaceList(
                     configuration.getStringList("message.purchasedClaim"),
                     "{price}", claimPrice,
                     "{seller}", seller.getName()
-            ));
+            )));
 
             if (seller.isOnline()) {
-                actionHandler.execute(seller.getPlayer(), Replace.replaceList(
+                actionHandler.execute(seller.getPlayer(), Color.translate(Replace.replaceList(
                         configuration.getStringList("message.soldClaim"),
                         "{price}", claimPrice,
                         "{buyer}", buyer.getName()
-                ));
+                )));
             } else {
-                MessageQueue.addToQueue(seller.getUniqueId(), Replace.replaceList(
+                MessageQueue.addToQueue(seller.getUniqueId(), Color.translate(Replace.replaceList(
                         configuration.getStringList("message.soldClaim"),
                         "{price}", claimPrice,
                         "{buyer}", buyer.getName())
-                );
+                ));
             }
 
             event.getRealEstateSign().getBlock().setType(Material.AIR);
